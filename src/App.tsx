@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Selector from './components/Selector';
+import RecommendationList from './components/RecommendationList';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userId, setUserId] = useState('');
+
+  type Recommendations = {
+    collaborative: string[];
+    content: string[];
+    azure: string[];
+  };
+
+  const [recommendations, setRecommendations] = useState<Recommendations>({
+    collaborative: [],
+    content: [],
+    azure: [],
+  });
+
+  const fetchRecommendations = async () => {
+    // Placeholder logic — replace with real API calls later
+    setRecommendations({
+      collaborative: ['101', '102', '103', '104', '105'],
+      content: ['201', '202', '203', '204', '205'],
+      azure: ['301', '302', '303', '304', '305'],
+    });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App" style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+      <h1>News Recommender</h1>
+      <Selector
+        userId={userId}
+        setUserId={setUserId}
+        onFetch={fetchRecommendations}
+      />
+      <RecommendationList
+        title="Collaborative Filtering"
+        items={recommendations.collaborative}
+      />
+      <RecommendationList
+        title="Content-Based Filtering"
+        items={recommendations.content}
+      />
+      <RecommendationList
+        title="Azure ML Model"
+        items={recommendations.azure}
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;
