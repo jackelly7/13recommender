@@ -1,9 +1,9 @@
-type RecommendationsListProps = {
+type RecommendationListProps = {
   title: string;
   items: string[];
 };
 
-function RecommendationsList({ title, items }: RecommendationsListProps) {
+function RecommendationList({ title, items }: RecommendationListProps) {
   return (
     <div style={{ marginBottom: '2rem' }}>
       <h2>{title}</h2>
@@ -16,4 +16,4 @@ function RecommendationsList({ title, items }: RecommendationsListProps) {
   );
 }
 
-export default RecommendationsList;
+export default RecommendationList;
